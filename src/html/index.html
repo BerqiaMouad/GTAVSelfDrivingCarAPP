@@ -40,27 +40,30 @@
 	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 	<script>
-		const loginForm = document.getElementById('login-form');
-		loginForm.addEventListener('submit', (event) => {
-			event.preventDefault(); // prevent the form from submitting normally
 
-			// get the form data
-			const formData = new FormData(loginForm);
-
-			// send an HTTP request to the login.php file
-			fetch('http://localhost/GTAVSelfDrivingCar/login.php', {
-				method: 'POST',
-				body: formData,
-				//mode: 'no-cors'
-			}).then(response => response.text()).then(data => {
-				// display the response from the server
-				if (data === 'Wrong username or password.') {
-					$('#error-message').text(data);
-				} else {
-					window.location.href = 'home.html';
-				}
-			}).catch(error => console.error(error));
+		$(document).ready(function(){
+			$("#login-form").submit(function(e){
+				e.preventDefault();
+				var formData = new FormData(this);
+				$.ajax({
+					url: "http://localhost/GTAVSelfDrivingCar/login.php",
+					type: "POST",
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					mode: 'no-cors',
+					success: function(data){
+						if(data == "You are logged in"){
+							window.location.href = "home.html";
+						}else{
+							$("#error-message").html(data);
+						}
+					}
+				});
+			});
 		});
+
 		
 	</script>
 </body>

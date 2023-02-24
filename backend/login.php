@@ -1,4 +1,5 @@
 <?php
+  header('Access-Control-Allow-Origin: *');
 
   $db_host = "localhost";
   $db_user = "root";
@@ -11,7 +12,7 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-
+if(isset($_POST['username']) && isset($_POST['password'])) {
   $username = $_POST["username"];
   $password = $_POST["password"];
 
@@ -27,5 +28,9 @@
     echo "Wrong username or password.";
   }
 
-  $conn->close();
+} else {
+  echo "Please enter username and password.";
+}
+$conn->close();
+
 ?>
