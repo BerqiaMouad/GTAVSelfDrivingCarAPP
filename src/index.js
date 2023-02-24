@@ -7,14 +7,13 @@ function createWindow() {
 	let mainWindow = new BrowserWindow({
 		width: 1280,
 		height: 1000,
-		autoHideMenuBar: false,
+		autoHideMenuBar: true,
 		resizable: false,
+		icon: path.join(__dirname, '../images/gtaVSelfDrivingCarBG.png'),
 		webPreferences: {
-			nodeIntegration: true,
-			enableRemoteModule: true,
+			nodeIntegration: false,
 			contextIsolation: false,
 			worldSafeExecuteJavaScript: true,
-			nodeIntegrationInWorker: true,
 			webSecurity: false // Add this line
 		},
 		contentSecurityPolicy: "script-src 'self' 'unsafe-inline' 'unsafe-eval';"
@@ -36,11 +35,9 @@ function createSplashScreen() {
 		alwaysOnTop: true,
 		resizable: false,
 		webPreferences: {
-			nodeIntegration: true,
-			enableRemoteModule: true,
+			nodeIntegration: false,
 			contextIsolation: false,
 			worldSafeExecuteJavaScript: true,
-			nodeIntegrationInWorker: true,
 			webSecurity: false
 		},
 		contentSecurityPolicy: "script-src 'self' 'unsafe-inline' 'unsafe-eval';"
