@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GTAV S.D.C</title>
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+
+	<section class="register-page">
+		<div class="wrapper-register">
+			<h2> User Register </h2>
+			<form  id="register-form" action="">
+				<div class="input-box">
+					<span class="icon"><ion-icon name="person"></ion-icon></span>
+					<input type="text" name="fname" required>
+					<label>First Name</label>
+				</div>
+				<div class="input-box">
+					<span class="icon"><ion-icon name="person"></ion-icon></span>
+					<input type="text" name="lname" required>
+					<label>Last Name</label>
+				</div>
+				<div class="input-box">
+					<span class="icon"><ion-icon name="person"></ion-icon></span>
+					<input type="text" name="age" required>
+					<label>Age</label>
+				</div>
+				<div class="input-box">
+					<span class="icon"><ion-icon name="person"></ion-icon></span>
+					<input type="text" name="username" required>
+					<label>Username</label>
+				</div>
+				<div class="input-box">
+					<span class="icon"><ion-icon name="mail"></ion-icon></span>
+					<input type="email" name="email" required>
+					<label>Email</label>
+				</div>
+				<div class="input-box">
+					<span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+					<input type="password" name="password" required>
+					<label>Password</label>
+				</div>
+				<button type="submit" class="btn">Register</button>
+				<div id="error-message" class="error-message"></div>
+			</form>
+		</div>
+	</section>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	
+	<!-- script to handle registration from register.php -->
+	<script>
+		$(document).ready(function(){
+			$("#register-form").submit(function(e){
+				e.preventDefault();
+				var formData = new FormData(this);
+				$.ajax({
+					url: "http://localhost/GTAVSelfDrivingCar/register.php",
+					type: "POST",
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					mode: 'no-cors',
+					success: function(data){
+						if(data == "success"){
+							window.location.href = "index.html";
+						}else{
+							$("#error-message").html(data);
+						}
+					}
+				});
+			});
+		});
+
+	</script>
+</body>
+</html>
